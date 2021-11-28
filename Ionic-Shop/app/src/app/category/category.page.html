@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/"><ion-icon slot="icon-only" name="arrow-round-back"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="todo" ngDefaultControl [(ngModel)]="Name">{{todo.name}}</span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/product" routerDirection="forward">
+        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let todo_product of todos_product">
+    <ion-item-sliding #item>
+      <ion-item *ngIf="todo_product.done" color="success">
+        {{todo_product.name}}
+      </ion-item>
+      <ion-item *ngIf="!todo_product.done" color="warning">
+        {{todo_product.name}}
+      </ion-item>
+
+      <ion-item-options side="start">
+        <button ion-button color="light" routerLink="/viewProduct/{{todo_product._id}}" routerDirection="forward">Done</button>
+      </ion-item-options>
+
+      <ion-item-options side="end">
+        <button ion-button color="light" routerLink="/viewProduct/{{todo_product._id}}">Edit</button>
+        <button ion-button (click)="delete([todo_product._id])" color="danger">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <!--
+    <div *ngIf="selectedItem" padding>
+      You navigated here from <b>{{selectedItem.title }}</b>
+    </div>
+  -->
+</ion-content>
